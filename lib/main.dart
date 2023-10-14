@@ -17,8 +17,10 @@ class _AppState extends State<App> {
       home: const HomeScreen(),
       theme: ThemeData(
           canvasColor: Colors.black,
+          textTheme: Typography.whiteCupertino,
           appBarTheme: const AppBarTheme(
               centerTitle: false,
+              elevation: 0,
               backgroundColor: Colors.black,
               titleTextStyle:
                   TextStyle(fontWeight: FontWeight.bold, fontSize: 20))),
