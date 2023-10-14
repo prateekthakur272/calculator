@@ -1,3 +1,4 @@
+import 'package:calculator/calculator.dart';
 import 'package:calculator/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Calculator calculator = Calculator();
   String display = '0';
 
   circleButton({
@@ -28,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: backgroundColor,
             foregroundColor: foregroundColor),
         onPressed: () {
-          setState(() {});
+          setState(() {
+            display = calculator.calculate(label);
+          });
         },
         child: Text(
           label,
@@ -51,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: backgroundColor,
             foregroundColor: foregroundColor),
         onPressed: () {
-          setState(() {});
+          setState(() {
+            display = calculator.calculate(label);
+          });
         },
         child: Text(
           label,
