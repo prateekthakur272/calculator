@@ -1,7 +1,8 @@
 class Calculator {
   num? a;
   num? b;
-  String? op;
+  String? operator;
+  String? prevOperator;
   List<String> stack = List.empty(growable: true);
 
   Calculator();
@@ -12,7 +13,8 @@ class Calculator {
         {
           a = null;
           b = null;
-          op = null;
+          operator = null;
+          prevOperator = null;
           stack.clear();
           return '0';
         }
@@ -28,11 +30,11 @@ class Calculator {
             '0' ||
             '.':
         {
-          if (op == null) {
+          if (operator == null) {
             stack.add(input);
             a = stackToNum();
             return a.toString();
-          } else if (op != null) {
+          } else if (operator != null) {
             stack.add(input);
             b = stackToNum();
             return b.toString();
@@ -41,15 +43,17 @@ class Calculator {
       case '+' || '-' || 'X' || '/' || '%':
         {
           stack.clear();
-          op = input;
-          a = operation(op!);
+          prevOperator = operator;
+          operator = input;
+          a = operation(prevOperator ?? '=');
+          b = null;
           return (a ?? 0).toString();
         }
       case '=':
         {
           {
             stack.clear();
-            a = operation(op ?? '=');
+            a = operation(operator ?? '=');
             return (a ?? 0).toString();
           }
         }
@@ -60,10 +64,10 @@ class Calculator {
           } else {
             stack.insert(0, '-');
           }
-          if (op == null) {
+          if (operator == null) {
             a = stackToNum();
             return a.toString();
-          } else if (op != null) {
+          } else if (operator != null) {
             b = stackToNum();
             return b.toString();
           }
@@ -107,7 +111,7 @@ class Calculator {
         }
       default:
         {
-          res = 0;
+          res = a ?? 0;
         }
     }
     return res;
